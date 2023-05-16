@@ -1,14 +1,18 @@
-import axios from 'axios'
+import axios from 'axios';
+import React from 'react';
+
 const AuthPage = (props) => {
     const onSubmit = (e) => {
-        e.preventDefault();
-        const { value } = e.target[0];
+        e.preventDefault(); // Prevenir el comportamiento de envío predeterminado del formulario
+        const { value } = e.target[0]; // Obtener el valor del campo de entrada del formulario
+
         axios.post(
             'http://localhost:3001/authenticate',
-        {username: value}
+            { username: value }
         )
-            .then(r => props.onAuth({ ...r.data, secret: value }))
-            .catch(e => console.log('error', e))
+            .then(r => props.onAuth({ ...r.data, secret: value })) // Llamar a la función "onAuth" pasando los datos de respuesta y el valor secreto (username)
+            .catch(e => console.log('error', e)); // Manejar el error de la solicitud
+
     };
 
     return (
